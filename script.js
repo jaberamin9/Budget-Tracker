@@ -2,8 +2,8 @@ const inputBox = document.getElementById('inputBox')
 
 
 const addMoney = () => {
-    const money = parseFloat(inputBox.value) || 0
-
+    const money = parseFloat(parseFloat(inputBox.value).toFixed(2)) || 0
+    console.log(money)
     if (money != 0) {
         const moneyList = JSON.parse(localStorage.getItem('money')) || []
         moneyList.push(money)
@@ -11,18 +11,18 @@ const addMoney = () => {
 
 
         if (money > 0) {
-            let totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0
+            let totalIncome = parseFloat(parseFloat(localStorage.getItem('totalIncome')).toFixed(2)) || 0
             totalIncome += money
-            localStorage.setItem('totalIncome', totalIncome)
+            localStorage.setItem('totalIncome', parseFloat(totalIncome.toFixed(2)))
 
-            updateValue(document.getElementById('incomeTxt'), totalIncome, 'Income: ')
+            updateValue(document.getElementById('incomeTxt'), parseFloat(totalIncome.toFixed(2)), 'Income: ')
 
         } else {
             let totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0
             totalExpense += money
-            localStorage.setItem('totalExpense', totalExpense)
+            localStorage.setItem('totalExpense', parseFloat(totalExpense.toFixed(2)))
 
-            updateValue(document.getElementById('expenseTxt'), (totalExpense * -1), 'Expense: ')
+            updateValue(document.getElementById('expenseTxt'), parseFloat((totalExpense * -1).toFixed(2)), 'Expense: ')
         }
 
         updateList(moneyList)
@@ -78,15 +78,17 @@ const listElement = (value, idx) => {
         const moneyList = JSON.parse(localStorage.getItem('money')) || []
 
         if (value > 0) {
-            let totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0
+            let totalIncome = parseFloat(parseFloat(localStorage.getItem('totalIncome')).toFixed(2)) || 0
+            console.log("toatal ", totalIncome)
+
             totalIncome -= value
-            localStorage.setItem('totalIncome', totalIncome)
-            updateValue(document.getElementById('incomeTxt'), totalIncome, 'Income: ')
+            localStorage.setItem('totalIncome', parseFloat(totalIncome.toFixed(2)))
+            updateValue(document.getElementById('incomeTxt'), parseFloat(totalIncome.toFixed(2)), 'Income: ')
         } else {
-            let totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0
+            let totalExpense = parseFloat(parseFloat(localStorage.getItem('totalExpense')).toFixed(2)) || 0
             totalExpense -= value
-            localStorage.setItem('totalExpense', totalExpense)
-            updateValue(document.getElementById('expenseTxt'), (totalExpense * -1), 'Expense: ')
+            localStorage.setItem('totalExpense', parseFloat(totalExpense.toFixed(2)))
+            updateValue(document.getElementById('expenseTxt'), parseFloat((totalExpense * -1).toFixed(2)), 'Expense: ')
         }
 
         moneyList.splice(idx, 1)
@@ -112,7 +114,7 @@ const listElement = (value, idx) => {
         let node_8 = document.createElement('button');
         node_8.setAttribute('class', 'px-5 py-2 bg-white text-black font-semibold hover:bg-gray-200 rounded-md');
         node_8.onclick = function () {
-            const updateValue = parseFloat(node_3.value)
+            const updateValue = parseFloat(parseFloat(node_3.value).toFixed(2))
             if (updateValue != 0) {
                 const moneyList = JSON.parse(localStorage.getItem('money')) || []
 
@@ -122,12 +124,14 @@ const listElement = (value, idx) => {
                     if (value <= 0) {
                         let totalExpense = parseFloat(localStorage.getItem('totalExpense')) || 0
                         totalExpense -= value
+                        totalExpense = parseFloat(totalExpense.toFixed(2))
                         localStorage.setItem('totalExpense', totalExpense)
                         document.getElementById('expenseTxt').innerText = 'Expense: ' + (totalExpense * -1)
                     } else {
                         totalIncome -= value
                     }
                     totalIncome += updateValue
+                    totalIncome = parseFloat(totalIncome.toFixed(2))
                     localStorage.setItem('totalIncome', totalIncome)
                     document.getElementById('incomeTxt').innerText = 'Income: ' + totalIncome
                 } else {
@@ -136,12 +140,14 @@ const listElement = (value, idx) => {
                     if (value > 0) {
                         let totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0
                         totalIncome -= value
+                        totalIncome = parseFloat(totalIncome.toFixed(2))
                         localStorage.setItem('totalIncome', totalIncome)
                         document.getElementById('incomeTxt').innerText = 'Income: ' + totalIncome
                     } else {
                         totalExpense -= value
                     }
                     totalExpense += updateValue
+                    totalExpense = parseFloat(totalExpense.toFixed(2))
                     localStorage.setItem('totalExpense', totalExpense)
                     document.getElementById('expenseTxt').innerText = 'Expense: ' + (totalExpense * -1)
                 }
