@@ -178,6 +178,10 @@ const listElement = (value, idx) => {
 const updateList = (moneyList) => {
     const element = document.getElementById('list')
     element.innerHTML = ''
+    if (moneyList.length === 0) element.innerHTML = `
+    <div class="w-full h-full flex justify-center items-center">
+    <P class="text-black font-medium text-md">Not yet inserted any balance.</P>
+    </div>`
     moneyList.map((item, idx) => {
         listElement(item, idx)
     })
