@@ -32248,7 +32248,7 @@ video {
 /* width */
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 /* Track */
@@ -32260,14 +32260,14 @@ video {
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #d2d2d2;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #b5b5b5;
 }
 
 @media (min-width: 640px) {
